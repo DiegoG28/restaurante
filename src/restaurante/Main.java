@@ -10,13 +10,13 @@ public class Main {
 
 		Table table = new Table(cluteries);
 		Waiter waiter = new Waiter(table);
-		Customer c1 = new Customer(table, latch, "C1");
-		Customer c2 = new Customer(table, latch, "C2");
-		Customer c3 = new Customer(table, latch, "C3");
-		Customer c4 = new Customer(table, latch, "C4");
-		Customer c5 = new Customer(table, latch, "C5");
-		Customer c6 = new Customer(table, latch, "C6");
-		Customer c7 = new Customer(table, latch, "C7");
+		Customer c1 = new Customer(table, latch, "C0");
+		Customer c2 = new Customer(table, latch, "C1");
+		Customer c3 = new Customer(table, latch, "C2");
+		Customer c4 = new Customer(table, latch, "C3");
+		Customer c5 = new Customer(table, latch, "C4");
+		Customer c6 = new Customer(table, latch, "C5");
+		Customer c7 = new Customer(table, latch, "C6");
 
 		waiter.start();
 		c1.start();

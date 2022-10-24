@@ -33,32 +33,41 @@ public class Customer extends Thread {
 		try {
 			synchronized (table) {
 				table.wait();
-				takeClutery();
 			}
+			takeClutery();
 		} catch (Exception e) {
 
 		}
 	}
 
-	public void takeClutery() {
-		try {
-			int seatNumber = table.chairs.indexOf(name);
-			Boolean hasCustomerEaten = false;
-			if (seatNumber != 6) {
-				while (!hasCustomerEaten) {
-					if (table.cluteries[seatNumber] && table.cluteries[seatNumber + 1]) {
-						table.cluteries[seatNumber] = false;
-						table.cluteries[seatNumber + 1] = false;
-						System.out.println("The customer " + name + " is eating.");
-						System.out.println("The customer " + name + " has finished eating.");
-						table.cluteries[seatNumber] = true;
-						table.cluteries[seatNumber + 1] = true;
-						hasCustomerEaten = true;
-					}
+	public void takeClutery() throws InterruptedException {
+		int seatNumber = table.chairs.indexOf(name);
+		Boolean hasCustomerTakenClutery = false;
+		Boolean printWaitMessage = true;
+		if (seatNumber != 6) {
+			while (!hasCustomerTakenClutery) {
+				if (table.cluteries[seatNumber] && table.cluteries[seatNumber + 1]) {
+					table.cluteries[seatNumber] = false;
+					table.cluteries[seatNumber + 1] = false;
+					System.out
+							.println("The clutery " + seatNumber + " and " + (seatNumber + 1) + " was taken by the customer "
+									+ name);
+					hasCustomerTakenClutery = true;
+					eat();
+				} else if (printWaitMessage) {
+					System.out.println("The customer " + name + " is waiting for clutery.");
+					printWaitMessage = false;
 				}
 			}
-		} catch (Exception e) {
-
 		}
+	}
+
+	public void eat() throws InterruptedException {
+		int seatNumber = table.chairs.indexOf(name);
+		System.out.println("The customer " + name + " is eating.");
+		sleep(5000);
+		System.out.println("The customer " + name + " has finished eating.");
+		table.cluteries[seatNumber] = true;
+		table.cluteries[seatNumber + 1] = true;
 	}
 }
