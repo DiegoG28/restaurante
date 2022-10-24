@@ -42,32 +42,45 @@ public class Customer extends Thread {
 
 	public void takeClutery() throws InterruptedException {
 		int seatNumber = table.chairs.indexOf(name);
-		Boolean hasCustomerTakenClutery = false;
+		Boolean hasCustomerEaten = false;
 		Boolean printWaitMessage = true;
-		while (!hasCustomerTakenClutery) {
-			if (seatNumber != 6) {
+		while (!hasCustomerEaten) {
+			// Si el cliente está en la primera posición
+			if (seatNumber == 0) {
+				if (table.cluteries[0] && table.cluteries[1]) {
+					table.cluteries[0] = false;
+					table.cluteries[1] = false;
+					System.out
+							.println("The clutery 0 and 1 was taken by the customer "
+									+ name);
+					hasCustomerEaten = true;
+					eat();
+				} else {
+					sleep(500);
+				}
+				// Si el cliente está en la última posición
+			} else if (seatNumber == 6) {
+				if (table.cluteries[6] && table.cluteries[0]) {
+					table.cluteries[6] = false;
+					table.cluteries[0] = false;
+					System.out.println("The clutery 6 and 0 was taken by the customer " + name);
+					hasCustomerEaten = true;
+					eat();
+				} else {
+					sleep(500);
+				}
+				// Si el cliente está en la posición 1-5
+			} else {
 				if (table.cluteries[seatNumber] && table.cluteries[seatNumber + 1]) {
 					table.cluteries[seatNumber] = false;
 					table.cluteries[seatNumber + 1] = false;
-					System.out
-							.println("The clutery " + seatNumber + " and " + (seatNumber + 1) + " was taken by the customer "
-									+ name);
-					hasCustomerTakenClutery = true;
+					System.out.println("The clutery " + seatNumber + " and "
+							+ (seatNumber + 1) + " was taken by the customer "
+							+ name);
+					hasCustomerEaten = true;
 					eat();
-				} else if (printWaitMessage) {
-					System.out.println("The customer " + name + " is waiting for clutery.");
-					printWaitMessage = false;
-				}
-			} else {
-				if (table.cluteries[seatNumber] && table.cluteries[0]) {
-					table.cluteries[seatNumber] = false;
-					table.cluteries[0] = false;
-					System.out.println("The clutery " + seatNumber + " and 0 was taken by the customer " + name);
-					hasCustomerTakenClutery = true;
-					eat();
-				} else if (printWaitMessage) {
-					System.out.println("The customer " + name + " is waiting for clutery.");
-					printWaitMessage = false;
+				} else {
+					sleep(500);
 				}
 			}
 		}
