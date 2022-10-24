@@ -43,7 +43,6 @@ public class Customer extends Thread {
 	public void takeClutery() throws InterruptedException {
 		int seatNumber = table.chairs.indexOf(name);
 		Boolean hasCustomerEaten = false;
-		Boolean printWaitMessage = true;
 		while (!hasCustomerEaten) {
 			// Si el cliente está en la primera posición
 			if (seatNumber == 0) {
@@ -53,8 +52,8 @@ public class Customer extends Thread {
 					System.out
 							.println("The clutery 0 and 1 was taken by the customer "
 									+ name);
-					hasCustomerEaten = true;
 					eat();
+					hasCustomerEaten = true;
 				} else {
 					sleep(500);
 				}
@@ -64,8 +63,8 @@ public class Customer extends Thread {
 					table.cluteries[6] = false;
 					table.cluteries[0] = false;
 					System.out.println("The clutery 6 and 0 was taken by the customer " + name);
-					hasCustomerEaten = true;
 					eat();
+					hasCustomerEaten = true;
 				} else {
 					sleep(500);
 				}
@@ -77,8 +76,8 @@ public class Customer extends Thread {
 					System.out.println("The clutery " + seatNumber + " and "
 							+ (seatNumber + 1) + " was taken by the customer "
 							+ name);
-					hasCustomerEaten = true;
 					eat();
+					hasCustomerEaten = true;
 				} else {
 					sleep(500);
 				}
