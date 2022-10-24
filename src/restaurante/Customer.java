@@ -44,21 +44,8 @@ public class Customer extends Thread {
 		int seatNumber = table.chairs.indexOf(name);
 		Boolean hasCustomerEaten = false;
 		while (!hasCustomerEaten) {
-			// Si el cliente está en la primera posición
-			if (seatNumber == 0) {
-				if (table.cluteries[0] && table.cluteries[1]) {
-					table.cluteries[0] = false;
-					table.cluteries[1] = false;
-					System.out
-							.println("The clutery 0 and 1 was taken by the customer "
-									+ name + ". Position: " + seatNumber);
-					eat();
-					hasCustomerEaten = true;
-				} else {
-					sleep(500);
-				}
-				// Si el cliente está en la última posición
-			} else if (seatNumber == 6) {
+			// Si el cliente esetá en la última posición
+			if (seatNumber == 6) {
 				if (table.cluteries[6] && table.cluteries[0]) {
 					table.cluteries[6] = false;
 					table.cluteries[0] = false;
@@ -69,7 +56,7 @@ public class Customer extends Thread {
 				} else {
 					sleep(500);
 				}
-				// Si el cliente está en la posición 1-5
+				// Si el cliente está en la posición 0-5
 			} else {
 				if (table.cluteries[seatNumber] && table.cluteries[seatNumber + 1]) {
 					table.cluteries[seatNumber] = false;
