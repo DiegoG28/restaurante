@@ -50,11 +50,17 @@ public class Customer extends Thread {
 					table.cluteries[6] = false;
 					table.cluteries[0] = false;
 					System.out
-							.println("The clutery 6 and 0 was taken by the customer " + name + ". Position: " + seatNumber);
+							.println(
+									"The clutery 6 and 0 was taken by the customer " + name + ". Position: " + seatNumber);
 					eat();
 					hasCustomerEaten = true;
+					synchronized (table) {
+						table.notifyAll();
+					}
 				} else {
-					sleep(500);
+					synchronized (table) {
+						table.wait();
+					}
 				}
 				// Si el cliente está en la posición 0-5
 			} else {
@@ -66,8 +72,13 @@ public class Customer extends Thread {
 							+ name + ". Position: " + seatNumber);
 					eat();
 					hasCustomerEaten = true;
+					synchronized (table) {
+						table.notifyAll();
+					}
 				} else {
-					sleep(500);
+					synchronized (table) {
+						table.wait();
+					}
 				}
 			}
 		}
@@ -76,7 +87,7 @@ public class Customer extends Thread {
 	public void eat() throws InterruptedException {
 		int seatNumber = table.chairs.indexOf(name);
 		System.out.println("The customer " + name + " is eating.");
-		sleep(5000);
+		sleep(7500);
 		System.out.println("The customer " + name + " has finished eating.");
 		table.cluteries[seatNumber] = true;
 		table.cluteries[seatNumber + 1] = true;
