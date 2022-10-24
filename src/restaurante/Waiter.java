@@ -13,6 +13,7 @@ public class Waiter extends Thread {
 				table.wait();
 				System.out.println("The table is full");
 				for (int i = 0; i < table.chairs.size(); i++) {
+					sleep(500);
 					System.out.println("The customer " + table.chairs.get(i) + " was served.");
 				}
 				table.notifyAll();

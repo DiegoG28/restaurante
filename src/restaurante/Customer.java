@@ -51,7 +51,7 @@ public class Customer extends Thread {
 					table.cluteries[1] = false;
 					System.out
 							.println("The clutery 0 and 1 was taken by the customer "
-									+ name);
+									+ name + ". Position: " + seatNumber);
 					eat();
 					hasCustomerEaten = true;
 				} else {
@@ -62,7 +62,8 @@ public class Customer extends Thread {
 				if (table.cluteries[6] && table.cluteries[0]) {
 					table.cluteries[6] = false;
 					table.cluteries[0] = false;
-					System.out.println("The clutery 6 and 0 was taken by the customer " + name);
+					System.out
+							.println("The clutery 6 and 0 was taken by the customer " + name + ". Position: " + seatNumber);
 					eat();
 					hasCustomerEaten = true;
 				} else {
@@ -75,7 +76,7 @@ public class Customer extends Thread {
 					table.cluteries[seatNumber + 1] = false;
 					System.out.println("The clutery " + seatNumber + " and "
 							+ (seatNumber + 1) + " was taken by the customer "
-							+ name);
+							+ name + ". Position: " + seatNumber);
 					eat();
 					hasCustomerEaten = true;
 				} else {
