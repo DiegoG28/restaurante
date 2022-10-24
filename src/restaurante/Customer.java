@@ -44,14 +44,25 @@ public class Customer extends Thread {
 		int seatNumber = table.chairs.indexOf(name);
 		Boolean hasCustomerTakenClutery = false;
 		Boolean printWaitMessage = true;
-		if (seatNumber != 6) {
-			while (!hasCustomerTakenClutery) {
+		while (!hasCustomerTakenClutery) {
+			if (seatNumber != 6) {
 				if (table.cluteries[seatNumber] && table.cluteries[seatNumber + 1]) {
 					table.cluteries[seatNumber] = false;
 					table.cluteries[seatNumber + 1] = false;
 					System.out
 							.println("The clutery " + seatNumber + " and " + (seatNumber + 1) + " was taken by the customer "
 									+ name);
+					hasCustomerTakenClutery = true;
+					eat();
+				} else if (printWaitMessage) {
+					System.out.println("The customer " + name + " is waiting for clutery.");
+					printWaitMessage = false;
+				}
+			} else {
+				if (table.cluteries[seatNumber] && table.cluteries[0]) {
+					table.cluteries[seatNumber] = false;
+					table.cluteries[0] = false;
+					System.out.println("The clutery " + seatNumber + " and 0 was taken by the customer " + name);
 					hasCustomerTakenClutery = true;
 					eat();
 				} else if (printWaitMessage) {
